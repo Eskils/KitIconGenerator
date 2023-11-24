@@ -9,7 +9,7 @@ Generate framework icons in Apple style.
 ![Screenshot of the KitIconGenerator application](Documentation/ApplicationScreenshotLight.png#gh-light-mode-only)
 ![Screenshot of the KitIconGenerator application](Documentation/ApplicationScreenshotDark.png#gh-dark-mode-only)
 
-- Download and open the latest release from [Releases](/releases/latest)
+- Download and open the latest release from [Releases](https://github.com/Eskils/KitIconGenerator/releases/latest)
 - Choose your framework’s icon (3D-models are also supported)
 - Choose the colors you want to use
 - Export image
