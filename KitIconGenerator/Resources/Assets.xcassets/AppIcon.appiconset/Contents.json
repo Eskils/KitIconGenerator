@@ -1,56 +1,67 @@
 {
   "images" : [
     {
+      "filename" : "KitIconGeneratorIconiOS.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 9.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 8.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 7.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 6.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 5.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 4.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 3.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS 1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
+      "filename" : "KitIconGeneratorIconmacOS.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

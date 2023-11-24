@@ -12,6 +12,8 @@ struct KitIconGeneratorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+        }.commands {
+            SidebarCommands()
         }
     }
 }
