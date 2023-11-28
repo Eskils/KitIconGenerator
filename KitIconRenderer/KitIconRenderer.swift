@@ -9,6 +9,7 @@ import ModelIO
 import SceneKit
 import SceneKit.ModelIO
 import CrossPlatform
+import CoreImage.CIFilterBuiltins
 
 public class KitIconRenderer {
 
@@ -341,8 +342,44 @@ public class KitIconRenderer {
     }
     
     /// Renders the specified image, model and colors into an image
-    public func snapshot(size: CGSize) -> CPImage {
-        renderer.snapshot(atTime: 0, with: size, antialiasingMode: .multisampling4X)
+    public func snapshot(size: CGSize, renderBackground: Bool = false) -> CPImage {
+        var snapshot = renderer.snapshot(atTime: 0, with: size, antialiasingMode: .multisampling4X)
+        
+        if renderBackground, let backgroundImage = generateBackgroundImage(size: size), let foregroundImage = snapshot.cgImage {
+            let composition = CIImage(cgImage: foregroundImage).composited(over: backgroundImage)
+            if let cgImage = CIContext().createCGImage(composition, from: composition.extent) {
+                snapshot = CPImage(cgImage: cgImage)
+            }
+        }
+        
+        return snapshot
+    }
+    
+    private func generateBackgroundImage(size: CGSize) -> CIImage? {
+        guard colors.indices.contains(1), colors.indices.contains(2) else {
+            return nil
+        }
+        
+        let gradient = CIFilter.linearGradient()
+        gradient.color0 = CIColor(cgColor: colors[1])
+        gradient.color1 = CIColor(cgColor: colors[2])
+        gradient.point0 = CGPoint(x: 0, y: size.height)
+        gradient.point1 = CGPoint(x: size.width, y: 0)
+        
+        guard let gradientImage = gradient.outputImage else {
+            return nil
+        }
+        
+        let alpha = 0.4
+        let alphaFilter = CIFilter.colorMatrix()
+        alphaFilter.aVector = CIVector(x: 0, y: 0, z: 0, w: alpha)
+        alphaFilter.inputImage = gradientImage
+        
+        let compositingFilter = CIFilter.sourceOverCompositing()
+        compositingFilter.backgroundImage = CIImage(color: .white)
+        compositingFilter.inputImage = alphaFilter.outputImage
+        
+        return compositingFilter.outputImage?.cropped(to: CGRect(origin: .zero, size: size))
     }
     
 }

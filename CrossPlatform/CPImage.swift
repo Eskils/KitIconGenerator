@@ -29,6 +29,29 @@ public extension CPImage {
         self.init(systemSymbolName: systemName, accessibilityDescription: nil)
     }
     
+    convenience init(cgImage: CGImage) {
+        self.init(cgImage: cgImage, size: CGSize(width: cgImage.width, height: cgImage.height))
+    }
+    
+    func resize(to: CGSize) -> CPImage {
+        let img = NSImage(size: to)
+
+        img.lockFocus()
+        defer {
+            img.unlockFocus()
+        }
+
+        if let ctx = NSGraphicsContext.current {
+            ctx.imageInterpolation = .high
+            draw(in: NSRect(origin: .zero, size: to),
+                 from: NSRect(origin: .zero, size: size),
+                 operation: .copy,
+                 fraction: 1)
+        }
+
+        return img
+    }
+    
 }
 #endif
 

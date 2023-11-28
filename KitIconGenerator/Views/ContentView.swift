@@ -71,6 +71,9 @@ struct ContentView: View {
     @State
     var showChooseSystemSymbol: Bool = false
     
+    @State
+    var showBackground = false
+    
     @ObservedObject
     var modelRotation: Vector3<Float> = .zero
     
@@ -129,7 +132,7 @@ struct ContentView: View {
         .onChange(of: inputSystemSymbolName) { symbolName in
             if let image = CPImage(systemName: symbolName) {
                 self.model = nil
-                self.iconImage = image
+                self.iconImage = image.resize(to: CGSize(width: 256, height: 256))
                 self.topContentType = .image
             }
         }
@@ -175,6 +178,9 @@ struct ContentView: View {
                 self.previewImage = renderModelToPreviewImage(model: model)
             }
         }
+        .onChange(of: showBackground, perform: { newValue in
+            renderScene()
+        })
         .onChange(of: colors, perform: { color in
             kitIconRenderer.colors = colors.compactMap { CPColor($0).cgColor }
         })
@@ -284,6 +290,10 @@ struct ContentView: View {
                 }
             }.frame(maxWidth: 250)
             
+            Toggle(isOn: $showBackground) {
+                Text("Draw background")
+            }
+            
             Button {
                 didPressExport()
             } label: {
@@ -317,6 +327,7 @@ struct ContentView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth: 500, maxHeight: 500)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 
                 Spacer()
@@ -327,12 +338,12 @@ struct ContentView: View {
     }
     
     func renderScene() {
-        let image = kitIconRenderer.snapshot(size: CGSize(width: 1024, height: 1024))
+        let image = kitIconRenderer.snapshot(size: CGSize(width: 1024, height: 1024), renderBackground: showBackground)
         self.renderedImage = image
     }
     
     func didPressExport() {
-        let image = kitIconRenderer.snapshot(size: CGSize(width: 1024, height: 1024))
+        let image = kitIconRenderer.snapshot(size: CGSize(width: 1024, height: 1024), renderBackground: showBackground)
         
         guard let data = image.pngData() else {
             assertionFailure()
