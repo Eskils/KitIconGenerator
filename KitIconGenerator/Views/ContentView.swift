@@ -18,105 +18,17 @@ enum TopContentType {
     case model
 }
 
-protocol StringParseable {
-    init?(string: String)
-    static var zero: Self { get }
-}
-
-extension Float: StringParseable {
-    init?(string: String) {
-        self.init(string)
-    }
-}
-
-class Vector3<T: SIMDScalar & StringParseable>: ObservableObject, Equatable {
+enum InputProvider: CaseIterable {
+    case image
+    case systemSymbol
     
-    @Published
-    var xText: String
-    
-    @Published
-    var yText: String
-    
-    @Published
-    var zText: String
-    
-    @Published
-    var x: T
-    
-    @Published
-    var y: T
-    
-    @Published
-    var z: T
-    
-    private var cancellables = Set<AnyCancellable>()
-    
-    init(x: T, y: T, z: T) {
-        self.x = x
-        self.y = y
-        self.z = z
-        self.xText = "\(x)"
-        self.yText = "\(y)"
-        self.zText = "\(z)"
-        
-        setupPublishers()
-    }
-    
-    private func setupPublishers() {
-        $x.removeDuplicates().sink { x in
-            self.xText = "\(x)"
-        }.store(in: &cancellables)
-        
-        $xText.removeDuplicates().sink { xText in
-            self.x = T(string: xText) ?? .zero
-        }.store(in: &cancellables)
-        
-        $y.removeDuplicates().sink { y in
-            self.yText = "\(y)"
-        }.store(in: &cancellables)
-        
-        $yText.removeDuplicates().sink { yText in
-            self.y = T(string: yText) ?? .zero
-        }.store(in: &cancellables)
-        
-        $z.removeDuplicates().sink { z in
-            self.zText = "\(z)"
-        }.store(in: &cancellables)
-        
-        $zText.removeDuplicates().sink { zText in
-            self.z = T(string: zText) ?? .zero
-        }.store(in: &cancellables)
-    }
-    
-    convenience init(simd: SIMD3<T>) {
-        self.init(x: simd.x, y: simd.y, z: simd.z)
-    }
-    
-    func toSIMD(conversionBlock: ((T) -> T)? = nil) -> SIMD3<T> {
-        if let conversionBlock {
-            return SIMD3(conversionBlock(x), conversionBlock(y), conversionBlock(z))
-        } else {
-            return SIMD3(x, y, z)
+    var title: String {
+        switch self {
+        case .image:
+            "Image"
+        case .systemSymbol:
+            "System symbol"
         }
-    }
-    
-    func assign(_ value: Vector3<T>) {
-        self.x = value.x
-        self.y = value.y
-        self.z = value.z
-    }
-    
-    static func == (lhs: Vector3<T>, rhs: Vector3<T>) -> Bool {
-            lhs.x == rhs.x
-        &&  lhs.y == rhs.y
-        &&  lhs.z == rhs.z
-    }
-    
-}
-
-extension Vector3 where T == Float {
-    static var zero: Vector3<T> {
-        Vector3(simd: .zero)
     }
 }
 
@@ -149,6 +61,15 @@ struct ContentView: View {
     
     @State
     var topContentType: TopContentType = .image
+    
+    @State
+    var selectedInputProvider: InputProvider = .image
+    
+    @State
+    var inputSystemSymbolName: String = ""
+    
+    @State
+    var showChooseSystemSymbol: Bool = false
     
     @ObservedObject
     var modelRotation: Vector3<Float> = .zero
@@ -201,6 +122,16 @@ struct ContentView: View {
             #else
             EmptyView()
             #endif
+        }
+        .sheet(isPresented: $showChooseSystemSymbol, content: {
+            SystemSymbolPickerView(selectedSymbolName: $inputSystemSymbolName)
+        })
+        .onChange(of: inputSystemSymbolName) { symbolName in
+            if let image = CPImage(systemName: symbolName) {
+                self.model = nil
+                self.iconImage = image
+                self.topContentType = .image
+            }
         }
         .onChange(of: iconURL) { url in
             guard
@@ -282,11 +213,31 @@ struct ContentView: View {
                         )
                 }
                 
-                Button {
-                    didPressImportIcon()
-                } label: {
-                    Text("Choose image or 3D-model")
-                }.buttonStyle(BorderedButtonStyle())
+                Picker("Input type", selection: $selectedInputProvider) {
+                    ForEach(InputProvider.allCases, id: \.self) { provider in
+                        Text(provider.title)
+                            .tag(provider)
+                    }
+                }
+                
+                switch selectedInputProvider {
+                case .image:
+                    Button {
+                        didPressImportIcon()
+                    } label: {
+                        Text("Choose image or 3D-model")
+                    }.buttonStyle(BorderedButtonStyle())
+                case .systemSymbol:
+                    VStack {
+                        TextField("Symbol name", text: $inputSystemSymbolName)
+                        Button {
+                            didPressSelectSystemIcon()
+                        } label: {
+                            Text("Choose system icon")
+                        }.buttonStyle(BorderedButtonStyle())
+                    }
+                }
+                
             }
             
             if enableExperimentalRotation && topContentType == .model {
@@ -394,6 +345,10 @@ struct ContentView: View {
     
     func didPressImportIcon() {
         importFile(toBinding: $iconURL)
+    }
+    
+    func didPressSelectSystemIcon() {
+        showChooseSystemSymbol = true
     }
     
     private func renderModelToPreviewImage(model: MDLAsset) -> CPImage {

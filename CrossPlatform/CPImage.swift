@@ -25,6 +25,10 @@ public extension CPImage {
         return imageRepresentation?.representation(using: .png, properties: [:])
     }
     
+    convenience init?(systemName: String) {
+        self.init(systemSymbolName: systemName, accessibilityDescription: nil)
+    }
+    
 }
 #endif
 

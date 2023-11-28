@@ -19,6 +19,15 @@
 		7B0646412B10C08E000148C8 /* KitIconRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D5462B0CF9D000A21E2F /* KitIconRenderer.swift */; };
 		7B0646422B10C08E000148C8 /* CGImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E72B0E4A770022FCAD /* CGImage+Extension.swift */; };
 		7B06464A2B10DCBB000148C8 /* CrossPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B0646222B10BFC8000148C8 /* CrossPlatform.framework */; };
+		7B1871AE2B15F3F400BB6F38 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871AD2B15F3F400BB6F38 /* Vector3.swift */; };
+		7B1871B02B15F41D00BB6F38 /* StringParseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871AF2B15F41D00BB6F38 /* StringParseable.swift */; };
+		7B1871B22B15F91500BB6F38 /* SystemSymbolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871B12B15F91500BB6F38 /* SystemSymbolPickerView.swift */; };
+		7B1871B42B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871B32B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift */; };
+		7B1871B72B15FA6400BB6F38 /* NameAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871B52B15FA6400BB6F38 /* NameAvailability.swift */; };
+		7B1871B82B15FA6400BB6F38 /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871B62B15FA6400BB6F38 /* Symbol.swift */; };
+		7B1871BA2B15FA9800BB6F38 /* Release.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871B92B15FA9800BB6F38 /* Release.swift */; };
+		7B1871BC2B15FB0500BB6F38 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871BB2B15FB0500BB6F38 /* Constants.swift */; };
+		7B1871BE2B1602C400BB6F38 /* name_availability.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B1871BD2B1602C400BB6F38 /* name_availability.plist */; };
 		7B2345E22B0E159A0022FCAD /* DocumentExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E12B0E159A0022FCAD /* DocumentExporter.swift */; };
 		7B2345E42B0E17B70022FCAD /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E32B0E17B70022FCAD /* URL+Extension.swift */; };
 		7B2345E62B0E254D0022FCAD /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E52B0E254D0022FCAD /* DocumentPicker.swift */; };
@@ -76,6 +85,15 @@
 		7B06464B2B10DF2B000148C8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7B06464C2B10F33C000148C8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7B06464D2B10F34D000148C8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7B1871AD2B15F3F400BB6F38 /* Vector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		7B1871AF2B15F41D00BB6F38 /* StringParseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringParseable.swift; sourceTree = "<group>"; };
+		7B1871B12B15F91500BB6F38 /* SystemSymbolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSymbolPickerView.swift; sourceTree = "<group>"; };
+		7B1871B32B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNameAvailabilityHelper.swift; sourceTree = "<group>"; };
+		7B1871B52B15FA6400BB6F38 /* NameAvailability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameAvailability.swift; sourceTree = "<group>"; };
+		7B1871B62B15FA6400BB6F38 /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
+		7B1871B92B15FA9800BB6F38 /* Release.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Release.swift; sourceTree = "<group>"; };
+		7B1871BB2B15FB0500BB6F38 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7B1871BD2B1602C400BB6F38 /* name_availability.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = name_availability.plist; sourceTree = "<group>"; };
 		7B2345DB2B0D04600022FCAD /* CPBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBezierPath.swift; sourceTree = "<group>"; };
 		7B2345DF2B0DFFD00022FCAD /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		7B2345E12B0E159A0022FCAD /* DocumentExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentExporter.swift; sourceTree = "<group>"; };
@@ -148,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB6D5392B0CF92200A21E2F /* ContentView.swift */,
+				7B1871B12B15F91500BB6F38 /* SystemSymbolPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +177,7 @@
 				7B2345EB2B0F51E10022FCAD /* VHStack.swift */,
 				7B2345E12B0E159A0022FCAD /* DocumentExporter.swift */,
 				7B2345E52B0E254D0022FCAD /* DocumentPicker.swift */,
+				7B1871B32B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -173,6 +193,7 @@
 		7B0646462B10C0C2000148C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7B1871BD2B1602C400BB6F38 /* name_availability.plist */,
 				7BB6D53B2B0CF92400A21E2F /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -183,6 +204,18 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B1871AC2B15F3E400BB6F38 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				7B1871AD2B15F3F400BB6F38 /* Vector3.swift */,
+				7B1871AF2B15F41D00BB6F38 /* StringParseable.swift */,
+				7B1871B52B15FA6400BB6F38 /* NameAvailability.swift */,
+				7B1871B92B15FA9800BB6F38 /* Release.swift */,
+				7B1871B62B15FA6400BB6F38 /* Symbol.swift */,
+			);
+			path = Types;
 			sourceTree = "<group>";
 		};
 		7BB6D52B2B0CF92200A21E2F = {
@@ -211,10 +244,12 @@
 			isa = PBXGroup;
 			children = (
 				7BB6D5372B0CF92200A21E2F /* KitIconGeneratorApp.swift */,
+				7B1871BB2B15FB0500BB6F38 /* Constants.swift */,
 				7BB6D53D2B0CF92400A21E2F /* KitIconGenerator.entitlements */,
 				7B0646452B10C0AF000148C8 /* Extensions */,
 				7B0646442B10C0A8000148C8 /* Helpers */,
 				7B0646432B10C09E000148C8 /* Views */,
+				7B1871AC2B15F3E400BB6F38 /* Types */,
 				7B0646462B10C0C2000148C8 /* Resources */,
 				7BB6D53E2B0CF92400A21E2F /* Preview Content */,
 			);
@@ -369,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BB6D5402B0CF92400A21E2F /* Preview Assets.xcassets in Resources */,
+				7B1871BE2B1602C400BB6F38 /* name_availability.plist in Resources */,
 				7BB6D53C2B0CF92400A21E2F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,12 +435,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B1871B72B15FA6400BB6F38 /* NameAvailability.swift in Sources */,
 				7BB6D53A2B0CF92200A21E2F /* ContentView.swift in Sources */,
 				7B2345E42B0E17B70022FCAD /* URL+Extension.swift in Sources */,
+				7B1871BA2B15FA9800BB6F38 /* Release.swift in Sources */,
 				7B2345E22B0E159A0022FCAD /* DocumentExporter.swift in Sources */,
 				7B2345E62B0E254D0022FCAD /* DocumentPicker.swift in Sources */,
+				7B1871B82B15FA6400BB6F38 /* Symbol.swift in Sources */,
 				7B2345EC2B0F51E10022FCAD /* VHStack.swift in Sources */,
 				7BB6D5382B0CF92200A21E2F /* KitIconGeneratorApp.swift in Sources */,
+				7B1871B02B15F41D00BB6F38 /* StringParseable.swift in Sources */,
+				7B1871B22B15F91500BB6F38 /* SystemSymbolPickerView.swift in Sources */,
+				7B1871BC2B15FB0500BB6F38 /* Constants.swift in Sources */,
+				7B1871B42B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift in Sources */,
+				7B1871AE2B15F3F400BB6F38 /* Vector3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
