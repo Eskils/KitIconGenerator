@@ -150,9 +150,10 @@ public class KitIconRenderer {
     private let cameraNode: SCNNode = {
         let camera = SCNCamera()
         camera.usesOrthographicProjection = true
+        camera.orthographicScale = 0.7
         let cameraNode = SCNNode()
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3(-2.135485, 3.542209, 3.097715)
+        cameraNode.position = SCNVector3(-2.100, 3.582, 3.097)
         cameraNode.eulerAngles = SCNVector3Make(-.pi / 4, -.pi / 4, 0)
         return cameraNode
     }()
