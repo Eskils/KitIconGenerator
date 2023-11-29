@@ -37,6 +37,11 @@
 		7B2345E42B0E17B70022FCAD /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E32B0E17B70022FCAD /* URL+Extension.swift */; };
 		7B2345E62B0E254D0022FCAD /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E52B0E254D0022FCAD /* DocumentPicker.swift */; };
 		7B2345EC2B0F51E10022FCAD /* VHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345EB2B0F51E10022FCAD /* VHStack.swift */; };
+		7BA997902B1778BA00A7BA9B /* TopContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA9978F2B1778BA00A7BA9B /* TopContentType.swift */; };
+		7BA997922B1778C800A7BA9B /* InputProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA997912B1778C800A7BA9B /* InputProvider.swift */; };
+		7BA997982B1778F700A7BA9B /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA997972B1778F700A7BA9B /* ToolbarView.swift */; };
+		7BA9979A2B1778FE00A7BA9B /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA997992B1778FE00A7BA9B /* PreviewView.swift */; };
+		7BA9979D2B17796A00A7BA9B /* KitIconGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA9979C2B17796A00A7BA9B /* KitIconGeneratorViewModel.swift */; };
 		7BB6D5382B0CF92200A21E2F /* KitIconGeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D5372B0CF92200A21E2F /* KitIconGeneratorApp.swift */; };
 		7BB6D53A2B0CF92200A21E2F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D5392B0CF92200A21E2F /* ContentView.swift */; };
 		7BB6D53C2B0CF92400A21E2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BB6D53B2B0CF92400A21E2F /* Assets.xcassets */; };
@@ -111,6 +116,11 @@
 		7B2345E52B0E254D0022FCAD /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		7B2345E72B0E4A770022FCAD /* CGImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+Extension.swift"; sourceTree = "<group>"; };
 		7B2345EB2B0F51E10022FCAD /* VHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHStack.swift; sourceTree = "<group>"; };
+		7BA9978F2B1778BA00A7BA9B /* TopContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopContentType.swift; sourceTree = "<group>"; };
+		7BA997912B1778C800A7BA9B /* InputProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProvider.swift; sourceTree = "<group>"; };
+		7BA997972B1778F700A7BA9B /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		7BA997992B1778FE00A7BA9B /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		7BA9979C2B17796A00A7BA9B /* KitIconGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitIconGeneratorViewModel.swift; sourceTree = "<group>"; };
 		7BB6D5342B0CF92200A21E2F /* KitIconGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KitIconGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BB6D5372B0CF92200A21E2F /* KitIconGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitIconGeneratorApp.swift; sourceTree = "<group>"; };
 		7BB6D5392B0CF92200A21E2F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -176,6 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				7BB6D5392B0CF92200A21E2F /* ContentView.swift */,
+				7BA997972B1778F700A7BA9B /* ToolbarView.swift */,
+				7BA997992B1778FE00A7BA9B /* PreviewView.swift */,
 				7B1871C12B1645C400BB6F38 /* GradientPicker.swift */,
 				7B1871C32B16487200BB6F38 /* GradientEditorView.swift */,
 				7B1871B12B15F91500BB6F38 /* SystemSymbolPickerView.swift */,
@@ -223,14 +235,24 @@
 			isa = PBXGroup;
 			children = (
 				7B1871AD2B15F3F400BB6F38 /* Vector3.swift */,
+				7BA997912B1778C800A7BA9B /* InputProvider.swift */,
 				7B1871AF2B15F41D00BB6F38 /* StringParseable.swift */,
 				7B1871B52B15FA6400BB6F38 /* NameAvailability.swift */,
 				7B1871B92B15FA9800BB6F38 /* Release.swift */,
 				7B1871B62B15FA6400BB6F38 /* Symbol.swift */,
 				7B1871BF2B1642EA00BB6F38 /* LinearGradientDescription.swift */,
 				7B1871C92B1681F000BB6F38 /* Colorization.swift */,
+				7BA9978F2B1778BA00A7BA9B /* TopContentType.swift */,
 			);
 			path = Types;
+			sourceTree = "<group>";
+		};
+		7BA9979B2B17794800A7BA9B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7BA9979C2B17796A00A7BA9B /* KitIconGeneratorViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		7BB6D52B2B0CF92200A21E2F = {
@@ -263,6 +285,7 @@
 				7BB6D53D2B0CF92400A21E2F /* KitIconGenerator.entitlements */,
 				7B0646452B10C0AF000148C8 /* Extensions */,
 				7B0646442B10C0A8000148C8 /* Helpers */,
+				7BA9979B2B17794800A7BA9B /* ViewModels */,
 				7B0646432B10C09E000148C8 /* Views */,
 				7B1871AC2B15F3E400BB6F38 /* Types */,
 				7B0646462B10C0C2000148C8 /* Resources */,
@@ -450,6 +473,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA997982B1778F700A7BA9B /* ToolbarView.swift in Sources */,
+				7BA9979A2B1778FE00A7BA9B /* PreviewView.swift in Sources */,
 				7B1871B72B15FA6400BB6F38 /* NameAvailability.swift in Sources */,
 				7B1871C62B164D5A00BB6F38 /* clamp.swift in Sources */,
 				7B1871CA2B1681F000BB6F38 /* Colorization.swift in Sources */,
@@ -457,6 +482,8 @@
 				7B2345E42B0E17B70022FCAD /* URL+Extension.swift in Sources */,
 				7B1871C42B16487200BB6F38 /* GradientEditorView.swift in Sources */,
 				7B1871BA2B15FA9800BB6F38 /* Release.swift in Sources */,
+				7BA997922B1778C800A7BA9B /* InputProvider.swift in Sources */,
+				7BA997902B1778BA00A7BA9B /* TopContentType.swift in Sources */,
 				7B2345E22B0E159A0022FCAD /* DocumentExporter.swift in Sources */,
 				7B2345E62B0E254D0022FCAD /* DocumentPicker.swift in Sources */,
 				7B1871B82B15FA6400BB6F38 /* Symbol.swift in Sources */,
@@ -468,6 +495,7 @@
 				7B1871B22B15F91500BB6F38 /* SystemSymbolPickerView.swift in Sources */,
 				7B1871BC2B15FB0500BB6F38 /* Constants.swift in Sources */,
 				7B1871B42B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift in Sources */,
+				7BA9979D2B17796A00A7BA9B /* KitIconGeneratorViewModel.swift in Sources */,
 				7B1871AE2B15F3F400BB6F38 /* Vector3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
