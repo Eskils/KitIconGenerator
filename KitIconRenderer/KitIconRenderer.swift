@@ -27,6 +27,8 @@ public class KitIconRenderer {
     @Published
     public private(set) var didChange: Int = 0
     
+    private let context: CIContext
+    
     /// The image to render on the top layer
     public var image: CGImage? {
         didSet {
@@ -38,13 +40,21 @@ public class KitIconRenderer {
                 iconMaterial.lightingModel = .blinn
             }
             
-            didChange += 1
+            DispatchQueue.main.async {
+                self.didChange += 1
+            }
         }
     }
     
+    public var underlayColor: Bool = true
+    
     private var iconMaterialImage: CGImage? {
-        colors.first.flatMap {
-            image?.underlay(color: $0)
+        if !underlayColor {
+            return image
+        }
+        
+        return colors.first.flatMap {
+            image?.underlay(color: $0, context: context)
         }
     }
     
@@ -174,22 +184,23 @@ public class KitIconRenderer {
         return material
     }()
     
-    public init(scene: SCNScene, boxSize: Float, boxHeight: Float, radius: Float, image: CGImage?) {
+    public init(scene: SCNScene, boxSize: Float, boxHeight: Float, radius: Float, image: CGImage?, context: CIContext? = nil) {
         self.scene = scene
         self.boxSize = boxSize
         self.boxHeight = boxHeight
         self.radius = radius
         self.image = image
+        self.context = context ?? CIContext()
         
         renderer.scene = scene
     }
     
-    public convenience init(image: CGImage? = nil) {
+    public convenience init(image: CGImage? = nil, context: CIContext? = nil) {
         let boxSize: Float = 1
         let boxHeight = boxSize / (3 * 2)
         let radius = boxSize * 0.22
         
-        self.init(scene: SCNScene(), boxSize: boxSize, boxHeight: boxHeight, radius: radius, image: image)
+        self.init(scene: SCNScene(), boxSize: boxSize, boxHeight: boxHeight, radius: radius, image: image, context: context)
         
         setupScene()
     }
@@ -343,12 +354,20 @@ public class KitIconRenderer {
     }
     
     /// Renders the specified image, model and colors into an image
-    public func snapshot(size: CGSize, renderBackground: Bool = false) -> CPImage {
-        var snapshot = renderer.snapshot(atTime: 0, with: size, antialiasingMode: .multisampling4X)
+    public func snapshot(size: CGSize, isQuick: Bool = false, renderBackground: Bool = false) -> CPImage {
+        if isQuick {
+            renderer.isJitteringEnabled = false
+            renderer.isTemporalAntialiasingEnabled = false
+        } else {
+            renderer.isJitteringEnabled = true
+            renderer.isTemporalAntialiasingEnabled = true
+        }
+        
+        var snapshot = renderer.snapshot(atTime: 0, with: size, antialiasingMode: isQuick ? .none : .multisampling16X)
         
         if renderBackground, let backgroundImage = generateBackgroundImage(size: size), let foregroundImage = snapshot.cgImage {
             let composition = CIImage(cgImage: foregroundImage).composited(over: backgroundImage)
-            if let cgImage = CIContext().createCGImage(composition, from: composition.extent) {
+            if let cgImage = context.createCGImage(composition, from: composition.extent) {
                 snapshot = CPImage(cgImage: cgImage)
             }
         }

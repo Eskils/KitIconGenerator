@@ -33,7 +33,6 @@ enum InputProvider: CaseIterable {
 }
 
 struct ContentView: View {
-    let kitIconRenderer = KitIconRenderer()
     
     @State
     var exportURL: URL?
@@ -74,10 +73,24 @@ struct ContentView: View {
     @State
     var showBackground = false
     
+    @StateObject
+    var colorization = Colorization()
+    
+    let context: CIContext
+    
+    let kitIconRenderer: KitIconRenderer
+    
+    let changeThread = DispatchQueue(label: "com.skillbreak.KitIconGenerator.changeThread", qos: .default, attributes: [], autoreleaseFrequency: .workItem, target: nil)
+    
     @ObservedObject
     var modelRotation: Vector3<Float> = .zero
     
     private let enableExperimentalRotation = false
+    
+    init() {
+        self.context = CIContext()
+        self.kitIconRenderer = KitIconRenderer(context: context)
+    }
     
     var body: some View {
         
@@ -163,7 +176,9 @@ struct ContentView: View {
         }
         .onChange(of: iconImage) { iconImage in
             kitIconRenderer.model = nil
-            kitIconRenderer.image = iconImage?.cgImage
+            let backgroundColor = CPColor(self.colors.first ?? .white)
+            let colorizedImage = iconImage.map { colorization.colorize(image: $0, backgroundColor: backgroundColor, context: context) } ?? iconImage
+            kitIconRenderer.image = colorizedImage?.cgImage
             
             if let iconImage {
                 self.previewImage = iconImage
@@ -191,6 +206,17 @@ struct ContentView: View {
         })
         .onReceive(kitIconRenderer.$didChange, perform: { _ in
             self.renderScene()
+        })
+        .onReceive(colorization.objectDidChange, perform: { _ in
+            changeThread.async {
+                kitIconRenderer.underlayColor = colorization.kind == .none
+                if  topContentType == .image,
+                    let iconImage,
+                    let backgroundColor = self.colors.first,
+                    let colorizedImage = colorization.colorize(image: iconImage, backgroundColor: CPColor(backgroundColor), context: context) {
+                        kitIconRenderer.image = colorizedImage.cgImage
+                }
+            }
         })
         .onAppear {
             self.iconImage = CPImage(resource: ImageResource.kitIconGeneratorTemplate)
@@ -242,6 +268,22 @@ struct ContentView: View {
                             Text("Choose system icon")
                         }.buttonStyle(BorderedButtonStyle())
                     }
+                }
+                
+                Picker("Fill", selection: $colorization.kind) {
+                    ForEach(Colorization.Kind.allCases, id: \.self) { provider in
+                        Text(provider.title)
+                            .tag(provider)
+                    }
+                }
+                
+                switch colorization.kind {
+                case .none:
+                    EmptyView()
+                case .color:
+                    ColorPicker("Color", selection: $colorization.color)
+                case .gradient:
+                    GradientPicker("Gradient", gradient: $colorization.gradient)
                 }
                 
             }
@@ -338,12 +380,14 @@ struct ContentView: View {
     }
     
     func renderScene() {
-        let image = kitIconRenderer.snapshot(size: CGSize(width: 1024, height: 1024), renderBackground: showBackground)
-        self.renderedImage = image
+        let image = kitIconRenderer.snapshot(size: CGSize(width: 512, height: 512), isQuick: true, renderBackground: showBackground)
+        DispatchQueue.main.async {
+            self.renderedImage = image
+        }
     }
     
     func didPressExport() {
-        let image = kitIconRenderer.snapshot(size: CGSize(width: 1024, height: 1024), renderBackground: showBackground)
+        let image = kitIconRenderer.snapshot(size: CGSize(width: 1024, height: 1024), isQuick: false, renderBackground: showBackground)
         
         guard let data = image.pngData() else {
             assertionFailure()

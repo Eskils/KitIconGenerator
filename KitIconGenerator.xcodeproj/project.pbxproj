@@ -28,6 +28,11 @@
 		7B1871BA2B15FA9800BB6F38 /* Release.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871B92B15FA9800BB6F38 /* Release.swift */; };
 		7B1871BC2B15FB0500BB6F38 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871BB2B15FB0500BB6F38 /* Constants.swift */; };
 		7B1871BE2B1602C400BB6F38 /* name_availability.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B1871BD2B1602C400BB6F38 /* name_availability.plist */; };
+		7B1871C02B1642EA00BB6F38 /* LinearGradientDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871BF2B1642EA00BB6F38 /* LinearGradientDescription.swift */; };
+		7B1871C22B1645C400BB6F38 /* GradientPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871C12B1645C400BB6F38 /* GradientPicker.swift */; };
+		7B1871C42B16487200BB6F38 /* GradientEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871C32B16487200BB6F38 /* GradientEditorView.swift */; };
+		7B1871C62B164D5A00BB6F38 /* clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871C52B164D5A00BB6F38 /* clamp.swift */; };
+		7B1871CA2B1681F000BB6F38 /* Colorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1871C92B1681F000BB6F38 /* Colorization.swift */; };
 		7B2345E22B0E159A0022FCAD /* DocumentExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E12B0E159A0022FCAD /* DocumentExporter.swift */; };
 		7B2345E42B0E17B70022FCAD /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E32B0E17B70022FCAD /* URL+Extension.swift */; };
 		7B2345E62B0E254D0022FCAD /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2345E52B0E254D0022FCAD /* DocumentPicker.swift */; };
@@ -94,6 +99,11 @@
 		7B1871B92B15FA9800BB6F38 /* Release.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Release.swift; sourceTree = "<group>"; };
 		7B1871BB2B15FB0500BB6F38 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B1871BD2B1602C400BB6F38 /* name_availability.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = name_availability.plist; sourceTree = "<group>"; };
+		7B1871BF2B1642EA00BB6F38 /* LinearGradientDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientDescription.swift; sourceTree = "<group>"; };
+		7B1871C12B1645C400BB6F38 /* GradientPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPicker.swift; sourceTree = "<group>"; };
+		7B1871C32B16487200BB6F38 /* GradientEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientEditorView.swift; sourceTree = "<group>"; };
+		7B1871C52B164D5A00BB6F38 /* clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clamp.swift; sourceTree = "<group>"; };
+		7B1871C92B1681F000BB6F38 /* Colorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colorization.swift; sourceTree = "<group>"; };
 		7B2345DB2B0D04600022FCAD /* CPBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPBezierPath.swift; sourceTree = "<group>"; };
 		7B2345DF2B0DFFD00022FCAD /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		7B2345E12B0E159A0022FCAD /* DocumentExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentExporter.swift; sourceTree = "<group>"; };
@@ -166,6 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				7BB6D5392B0CF92200A21E2F /* ContentView.swift */,
+				7B1871C12B1645C400BB6F38 /* GradientPicker.swift */,
+				7B1871C32B16487200BB6F38 /* GradientEditorView.swift */,
 				7B1871B12B15F91500BB6F38 /* SystemSymbolPickerView.swift */,
 			);
 			path = Views;
@@ -177,6 +189,7 @@
 				7B2345EB2B0F51E10022FCAD /* VHStack.swift */,
 				7B2345E12B0E159A0022FCAD /* DocumentExporter.swift */,
 				7B2345E52B0E254D0022FCAD /* DocumentPicker.swift */,
+				7B1871C52B164D5A00BB6F38 /* clamp.swift */,
 				7B1871B32B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift */,
 			);
 			path = Helpers;
@@ -214,6 +227,8 @@
 				7B1871B52B15FA6400BB6F38 /* NameAvailability.swift */,
 				7B1871B92B15FA9800BB6F38 /* Release.swift */,
 				7B1871B62B15FA6400BB6F38 /* Symbol.swift */,
+				7B1871BF2B1642EA00BB6F38 /* LinearGradientDescription.swift */,
+				7B1871C92B1681F000BB6F38 /* Colorization.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -436,15 +451,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B1871B72B15FA6400BB6F38 /* NameAvailability.swift in Sources */,
+				7B1871C62B164D5A00BB6F38 /* clamp.swift in Sources */,
+				7B1871CA2B1681F000BB6F38 /* Colorization.swift in Sources */,
 				7BB6D53A2B0CF92200A21E2F /* ContentView.swift in Sources */,
 				7B2345E42B0E17B70022FCAD /* URL+Extension.swift in Sources */,
+				7B1871C42B16487200BB6F38 /* GradientEditorView.swift in Sources */,
 				7B1871BA2B15FA9800BB6F38 /* Release.swift in Sources */,
 				7B2345E22B0E159A0022FCAD /* DocumentExporter.swift in Sources */,
 				7B2345E62B0E254D0022FCAD /* DocumentPicker.swift in Sources */,
 				7B1871B82B15FA6400BB6F38 /* Symbol.swift in Sources */,
+				7B1871C02B1642EA00BB6F38 /* LinearGradientDescription.swift in Sources */,
 				7B2345EC2B0F51E10022FCAD /* VHStack.swift in Sources */,
 				7BB6D5382B0CF92200A21E2F /* KitIconGeneratorApp.swift in Sources */,
 				7B1871B02B15F41D00BB6F38 /* StringParseable.swift in Sources */,
+				7B1871C22B1645C400BB6F38 /* GradientPicker.swift in Sources */,
 				7B1871B22B15F91500BB6F38 /* SystemSymbolPickerView.swift in Sources */,
 				7B1871BC2B15FB0500BB6F38 /* Constants.swift in Sources */,
 				7B1871B42B15FA1F00BB6F38 /* SFNameAvailabilityHelper.swift in Sources */,

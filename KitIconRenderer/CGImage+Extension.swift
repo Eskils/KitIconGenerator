@@ -9,13 +9,13 @@ import CoreImage
 
 extension CGImage {
     
-    func underlay(color: CGColor) -> CGImage? {
+    func underlay(color: CGColor, context: CIContext) -> CGImage? {
         let extent = CGRect(x: 0, y: 0, width: width, height: height)
         let colorImage = CIImage(color: CIColor(cgColor: color))
             .clamped(to: extent)
         let composition = CIImage(cgImage: self).composited(over: colorImage)
         
-        return CIContext().createCGImage(composition, from: extent)
+        return context.createCGImage(composition, from: extent)
     }
     
 }
