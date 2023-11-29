@@ -10,6 +10,20 @@ import SwiftUI
 #if canImport(UIKit)
 import UIKit
 public typealias CPImage = UIImage
+
+public extension CPImage {
+    func resize(to size: CGSize) -> CPImage {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        
+        let image = renderer.image { context in
+            self.draw(in: CGRect(origin: .zero, size: size))
+        }
+        
+        return image
+    }
+    
+}
+
 #elseif canImport(Cocoa)
 import Cocoa
 public typealias CPImage = NSImage
@@ -33,8 +47,8 @@ public extension CPImage {
         self.init(cgImage: cgImage, size: CGSize(width: cgImage.width, height: cgImage.height))
     }
     
-    func resize(to: CGSize) -> CPImage {
-        let img = NSImage(size: to)
+    func resize(to size: CGSize) -> CPImage {
+        let img = NSImage(size: size)
 
         img.lockFocus()
         defer {
@@ -43,8 +57,8 @@ public extension CPImage {
 
         if let ctx = NSGraphicsContext.current {
             ctx.imageInterpolation = .high
-            draw(in: NSRect(origin: .zero, size: to),
-                 from: NSRect(origin: .zero, size: size),
+            draw(in: NSRect(origin: .zero, size: size),
+                 from: NSRect(origin: .zero, size: self.size),
                  operation: .copy,
                  fraction: 1)
         }

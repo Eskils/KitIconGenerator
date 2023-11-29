@@ -363,7 +363,12 @@ public class KitIconRenderer {
             renderer.isTemporalAntialiasingEnabled = true
         }
         
-        var snapshot = renderer.snapshot(atTime: 0, with: size, antialiasingMode: isQuick ? .none : .multisampling16X)
+        #if os(macOS)
+        let maxAntialiasingMode = SCNAntialiasingMode.multisampling16X
+        #else
+        let maxAntialiasingMode = SCNAntialiasingMode.multisampling4X
+        #endif
+        var snapshot = renderer.snapshot(atTime: 0, with: size, antialiasingMode: isQuick ? .none : maxAntialiasingMode)
         
         if renderBackground, let backgroundImage = generateBackgroundImage(size: size), let foregroundImage = snapshot.cgImage {
             let composition = CIImage(cgImage: foregroundImage).composited(over: backgroundImage)
